@@ -4,21 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
     public function index() {
         $projects = Project::all();
 
-        return view('admin.projects.index', compact($projects));
+        return view('admin.projects.index', ["projects" => $projects]);
     }
 
-    public function show($id) {
-        $project = Project::findorFail($id);
+    public function show($slug) {
+        $project = Project::where("slug", $slug)->first();
 
-        return view('admin.projects.show', compact($project));
+        return view('admin.projects.show', ["project" => $project]);
     }
 
     public function create() {
@@ -30,11 +30,22 @@ class ProjectController extends Controller
             'title' => "required|max:255",
             'description' => "required",
             'imageURL' => "required",
-            'slug' => "required|max:255"
         ]);
+
+        $counter = 0;
+
+        do {
+            $slug = str::slug($data["title"] . ($counter > 0 ? "-" . $counter : ""));
+
+            $alreadyexist = Project::where("slug", $slug)->first();
+
+            $counter++;
+        }while($alreadyexist);
+
+        $data["slug"] = $slug;
 
         $project = Project::create($data);
 
-        return redirect()->route('admin.profile.show');
+        return redirect()->route('admin.projects.index');
     }
 }
