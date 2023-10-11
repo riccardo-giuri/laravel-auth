@@ -11,7 +11,7 @@
             @foreach ($projects as $project)
                 <div class="col-4">
                     <div class="card">
-                        <img src="{{ $project->imageURL }}" class="card-img-top" alt="...">
+                        <img src="{{ asset('/storage/' . $project->imageURL)}}" class="card-img-top" alt="...">
                         <div class="card-body">
                           <h5 class="card-title">Nome Progetto: {{$project->title}}</h5>
                           <a href="{{route('admin.projects.show', $project->slug)}}" class="btn btn-outline-dark">Dettagli progetto</a>

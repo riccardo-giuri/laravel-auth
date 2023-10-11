@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProjectUpstoreRequest;
+use App\Http\Requests\ProjectStoreRequest;
+use App\Http\Requests\ProjectUpdateRequest;
 use App\Models\Project;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -25,12 +27,14 @@ class ProjectController extends Controller
         return view('admin.projects.create');
     }
 
-    public function store(ProjectUpstoreRequest $request) {
+    public function store(ProjectStoreRequest $request) {
         $data = $request->validated();
 
         $data["slug"] = $this->generateSlug($data["title"]);
 
         $data['finished'] = intval($data['finished']);
+
+        $data['imageURL'] = Storage::put("images", $data["imageURL"]);
 
         $project = Project::create($data);
 
@@ -43,7 +47,7 @@ class ProjectController extends Controller
         return view('admin.projects.edit', ["project" => $project]);
     }
 
-    public function update(ProjectUpstoreRequest $request, $slug) {
+    public function update(ProjectUpdateRequest $request, $slug) {
         $data = $request->validated();
 
         $project = Project::where("slug", $slug)->first();
@@ -54,6 +58,15 @@ class ProjectController extends Controller
 
         $data['finished'] = intval($data['finished']);
 
+        if(isset($data["imageURL"])) {
+            if($project->imageURL) {
+                Storage::delete($project->imageURL);
+            }
+
+            $image_path = Storage::put("images", $data["imageURL"]);
+            $data["imageURL"] = $image_path;
+        }
+
         $project->update($data);
 
         return redirect()->route('admin.projects.show', $project->slug);
@@ -61,6 +74,10 @@ class ProjectController extends Controller
 
     public function destroy($slug) {
         $project = Project::where("slug", $slug)->first();
+
+        if($project->imageURL) {
+            Storage::delete($project->imageURL);
+        }
 
         $project->delete();
 

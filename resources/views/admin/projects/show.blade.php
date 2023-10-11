@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <img src={{ $project->imageURL}} alt="" class="w-100">
+                <img src="{{ asset('/storage/' . $project->imageURL)}}" alt="" class="w-100">
             </div>
 
             <div class="col-6">

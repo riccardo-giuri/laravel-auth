@@ -15,7 +15,7 @@
             </div>
         @endif
 
-        <form action={{route("admin.projects.store")}} method="post">
+        <form action={{route("admin.projects.store")}} method="post" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
@@ -24,7 +24,7 @@
             </div>
             <div class="mb-3">
                 <label for="form-label">URLimmagine</label>
-                <input type="text" class="form-control" name="imageURL">
+                <input type="file" accept="image/*" class="form-control" name="imageURL">
             </div>
             <div class="mb-3">
                 <label for="form-label">GithubURL</label>

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProjectUpstoreRequest extends FormRequest
+class ProjectUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,21 @@ class ProjectUpstoreRequest extends FormRequest
         return [
             'title' => "required|max:255",
             'description' => "required",
-            'imageURL' => "required",
+            'imageURL' => "nullable|image|max:7000",
             'githubURL' => "required",
             'finished' => "required"
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'imageURL.max' => 'l\'immagine è troppo grande, massimo 7MB!',
         ];
     }
 }

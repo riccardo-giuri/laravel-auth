@@ -15,7 +15,7 @@
             </div>
         @endif
 
-        <form action={{ route("admin.projects.update", $project->slug) }} method="post">
+        <form action={{ route("admin.projects.update", $project->slug) }} method="post" enctype="multipart/form-data">
             @csrf
 
             @method('patch');
@@ -26,7 +26,7 @@
             </div>
             <div class="mb-3">
                 <label for="form-label">URLimmagine</label>
-                <input type="text" class="form-control" name="imageURL" value="{{ $project->imageURL }}">
+                <input type="file" class="form-control" name="imageURL" value="{{ $project->imageURL }}">
             </div>
             <div class="mb-3">
                 <label for="form-label">GithubURL</label>
