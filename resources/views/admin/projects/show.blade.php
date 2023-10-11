@@ -25,14 +25,14 @@
                     </li>
                     <li>
                         <div class="route_buttons d-flex gap-2 mt-2">
-                            <a href="#" class="btn btn-outline-dark">Modifica Comic</a>
-                            {{-- <form action="" method="POST">
+                            <a href="{{route('admin.projects.edit', $project->slug)}}" class="btn btn-outline-dark">Modifica Progetto</a>
+                            <form action="{{route('admin.projects.destroy', $project->slug)}}" method="POST">
                                 @csrf
 
                                 @method('delete')
 
-                                <input type="submit" value="Cancella Comic" class="btn btn-outline-light">
-                            </form> --}}
+                                <input type="submit" value="Cancella Progetto" class="btn btn-outline-dark">
+                            </form>
                         </div>
                     </li>
                 </ul>
