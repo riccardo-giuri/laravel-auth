@@ -23,11 +23,11 @@
                 <input type="text" class="form-control" name="title">
             </div>
             <div class="mb-3">
-                <label for="form-label">URL immagine</label>
+                <label for="form-label">URLimmagine</label>
                 <input type="text" class="form-control" name="imageURL">
             </div>
             <div class="mb-3">
-                <label for="form-label">Github URL</label>
+                <label for="form-label">GithubURL</label>
                 <input type="text" class="form-control" name="githubURL">
             </div>
             <div class="mb-3">

@@ -25,6 +25,7 @@ class ProjectUpstoreRequest extends FormRequest
             'title' => "required|max:255",
             'description' => "required",
             'imageURL' => "required",
+            'githubURL' => "required",
             'finished' => "required"
         ];
     }

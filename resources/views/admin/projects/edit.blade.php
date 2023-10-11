@@ -25,11 +25,11 @@
                 <input type="text" class="form-control" name="title" value="{{ $project->title }}">
             </div>
             <div class="mb-3">
-                <label for="form-label">URL immagine</label>
+                <label for="form-label">URLimmagine</label>
                 <input type="text" class="form-control" name="imageURL" value="{{ $project->imageURL }}">
             </div>
             <div class="mb-3">
-                <label for="form-label">Github URL</label>
+                <label for="form-label">GithubURL</label>
                 <input type="text" class="form-control" name="githubURL" value="{{ $project->githubURL }}">
             </div>
             <div class="mb-3">
